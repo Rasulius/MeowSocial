@@ -1,7 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-
-
 <!--
     TODO: implement night theme
 -->
@@ -19,20 +16,31 @@
         <item name="colorOnSecondary">@color/black</item>-->
 
         <!-- Text settings -->
-        <item name="android:textColorPrimary">@color/textColor</item>
-        <item name="android:textSize">18sp</item>
+
+        <item name="colorOnSurface">@color/textColor</item>
+        <item name="android:textSize">16sp</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
-        <item name="fontFamily">@font/rubik</item>
-
+        <item name="fontFamily">@font/family_rubik_medium</item>
 
         <item name="textInputStyle">@style/RossApp_TextInputLayoutStyle</item>
+        <item name="tabStyle">@style/RossApp_TabStyle</item>
+    </style>
+
+    <!--Tabs-->
+    <style name="RossApp_TabStyle" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabTextAppearance">@style/RossApp_TabTextAppearance</item>
+        <item name="tabTextColor">@color/selector_tabtext</item>
+    </style>
+
+    <style name="RossApp_TabTextAppearance" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <!---Text inputs-->
-
     <style name="RossApp_TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusBottomEnd">@dimen/textInputCornerRadius</item>
         <item name="boxCornerRadiusBottomStart">@dimen/textInputCornerRadius</item>
@@ -52,6 +60,7 @@
 
     <style name="RossApp_EditTextStyle" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
         <item name="android:textColor">@color/textColor</item>
+        <item name="fontFamily">@font/family_rubik</item>
     </style>
 
 
@@ -68,7 +77,13 @@
 
     <!---Reused styles for text-->
     <style name="inactiveText">
+        <item name="fontFamily">@font/family_rubik</item>
         <item name="android:textColor">@color/inactiveTextColor</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="regularText">
+        <item name="android:textColor">@color/textColor</item>
     </style>
 
     <style name="accentText">

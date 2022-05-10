@@ -5,8 +5,9 @@
         app:font="@font/rubik_regular"
         app:fontStyle="normal"
         app:fontWeight="400" />
+
     <font
-        app:font="@font/rubik_regular"
+        app:font="@font/rubik_italic"
         app:fontStyle="italic"
         app:fontWeight="400" />
 

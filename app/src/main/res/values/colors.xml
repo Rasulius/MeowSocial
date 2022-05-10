@@ -3,7 +3,7 @@
 
     <color name="textColor">#333F5E</color>
     <color name="borderColor">#e5e5e5</color>
-    <color name="inactiveTextColor">#BDBDBD</color>
+    <color name="inactiveTextColor">#989FB2</color>
 
     <!-- Pallete-->
     <color name="black">#FF000000</color>
