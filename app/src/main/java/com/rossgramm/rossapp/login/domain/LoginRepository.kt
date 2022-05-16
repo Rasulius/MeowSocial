@@ -1,11 +1,9 @@
-package com.rossgramm.rossapp.login.data
+package com.rossgramm.rossapp.login.domain
 
+import com.rossgramm.rossapp.login.data.LoginDataSource
+import com.rossgramm.rossapp.base.Result
 import com.rossgramm.rossapp.login.data.model.LoggedInUser
-
-/**
- * Class that requests authentication and user information from the remote data source and
- * maintains an in-memory cache of login status and user credentials information.
- */
+import com.rossgramm.rossapp.login.data.webApi.LoginResponse
 
 class LoginRepository(val dataSource: LoginDataSource) {
 
@@ -13,12 +11,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
     var user: LoggedInUser? = null
         private set
 
-    val isLoggedIn: Boolean
-        get() = user != null
-
     init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
         user = null
     }
 
@@ -27,12 +20,12 @@ class LoginRepository(val dataSource: LoginDataSource) {
         dataSource.logout()
     }
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    suspend fun login(username: String, password: String): Result<LoginResponse> {
         // handle login
         val result = dataSource.login(username, password)
 
         if (result is Result.Success) {
-            setLoggedInUser(result.data)
+            setLoggedInUser(LoggedInUser("",""/*from result*/))
         }
 
         return result

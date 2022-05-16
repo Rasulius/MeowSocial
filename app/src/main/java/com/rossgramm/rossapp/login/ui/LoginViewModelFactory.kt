@@ -3,7 +3,7 @@ package com.rossgramm.rossapp.login.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rossgramm.rossapp.login.data.LoginDataSource
-import com.rossgramm.rossapp.login.data.LoginRepository
+import com.rossgramm.rossapp.login.domain.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
