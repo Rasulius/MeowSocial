@@ -1,8 +1,7 @@
 package com.rossgramm.rossapp.login.ui
 
-import android.app.Activity
 import android.content.Context
-import androidx.lifecycle.Observer
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.annotation.StringRes
@@ -10,16 +9,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.rossgramm.rossapp.MainActivity
 import com.rossgramm.rossapp.databinding.ActivityLoginBinding
+import com.rossgramm.rossapp.databinding.FragmentRegistrationBinding
 
 import com.rossgramm.rossapp.R
 
@@ -27,23 +27,32 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var loginBinding: FragmentRegistrationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        loginBinding = FragmentRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val login = loginBinding.loginButton
 
-       /* val username = binding.username
+
+        /*val username = binding.username
         val usernameEt = binding.usernameEt
         val password = binding.password
         val passwordEt = binding.passwordEt
         val login = binding.loginButton
-        val loading = binding.loading*/
+        val loading = binding.loading
+        */
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
         connectTabsWithViewPager(this)
+
+
+
+
 /*
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -101,11 +110,18 @@ class LoginActivity : AppCompatActivity() {
                 false
             }
 
-            login.setOnClickListener {
+
+       // }
+
+        */
+       login.setOnClickListener {
                 //loading.visibility = View.VISIBLE
                 //loginViewModel.login(usernameEt.text.toString(), passwordEt.text.toString())
-            }*/
-       // }
+           val homeActivity = Intent(this, MainActivity::class.java)
+           ContextCompat.startActivity(this, homeActivity, null)
+       }
+
+
     }
 
     private fun connectTabsWithViewPager(context: Context) {
@@ -130,6 +146,10 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
+/*
+    override fun onClick(p0: View?) {
+        Toast.makeText(this,"dddd", Toast.LENGTH_SHORT)
+    }*/
 }
 
 class LoginTabsAdapter(

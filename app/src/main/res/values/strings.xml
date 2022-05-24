@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RossApp</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_home">Домой</string>
+    <string name="title_dashboard">Поиск</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
@@ -11,15 +11,14 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-
-
+    <string name="ryta_account">"@ryta_permyakova"</string>
+    <string name="gorodnaneve">"gorodnaneve Люблю тебя, Петра творенье, Люблю твой строгий, стройный вид... ещё"</string>
+    <string name="TODO">"to_do"</string>
     <string name="empty_string" />
-
     <string name="login_hint">Введите адрес эл. почты</string>
     <string name="password_hint">Пароль</string>
     <string name="action_sign_in">Войти</string>
     <string name="login_alternative_enter_label">Войти с помощью: </string>
-
     <string name="tab_enter">Вход</string>
     <string name="tab_registration">Регистрация</string>
     <string name="login_enter_label">При входе вы подтверждаете согласие с условиями пользования Россграм.</string>
@@ -29,5 +28,8 @@
     <string name="action_registration">Зарегистрироваться</string>
     <string name="login_registration_label1">Регистрируясь, вы принимаете условия </string>
     <string name="login_registration_label2">Политика по обработке персональных данных</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Search">Поиск</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
