@@ -1,4 +1,8 @@
 <resources>
-    <dimen name="activity_horizontal_margin">48dp</dimen>
     <dimen name="textInputCornerRadius">15dp</dimen>
+    <dimen name="activity_horizontal_margin">48dp</dimen>
+    <dimen name="common_margin_16dp">16dp</dimen>
+    <dimen name="small_rubik_text_15dp">13dp</dimen>
+    <dimen name="view_divider_height">0.5dp</dimen>
+    <dimen name="zero_dp">0dp</dimen>
 </resources>

@@ -32,6 +32,16 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    dataBinding {
+        enabled = true
+    }
+    namespace 'com.rossgramm.rossapp'
+
+
+    buildFeatures.dataBinding = true
+    buildFeatures.viewBinding = true
+
 }
 
 dependencies {
@@ -48,10 +58,16 @@ dependencies {
     //google
     implementation 'com.google.android.material:material:1.6.0'
 
+    // rxjava
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
     //kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.10"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.21"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
+    // Coil load images to imageView
+    implementation "io.coil-kt:coil:2.1.0"
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
