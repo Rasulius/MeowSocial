@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View.OnClickListener" />
+        <variable name="clickListener" type="android.view.View.OnClickListener"/>
+        <variable
+            name="actionsListener"
+            type="com.rossgramm.rossapp.ui.post.PostItemUserActionsListener"/>
+        <variable name="post" type="com.rossgramm.rossapp.home.data.Post"/>
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View style="@style/ViewDivider"
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:id="@+id/friends_list"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+            <!--TODO приминить стиль круглой кнопки, и положить еще сверху иконку с плюсиком-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="wrap_content"
+                 android:layout_width="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/my_avatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_photo_temp"
+                    android:background="@drawable/roundimage"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:shapeAppearanceOverlay="@style/CornerSize50Percent"
+                    android:contentDescription="@string/TODO"/>
+                <ImageView
+                    android:id="@+id/my_plus"
+                    android:layout_width="22dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="52dp"
+                    android:layout_marginTop="52dp"
+                    android:contentDescription="@string/TODO"
+                    android:src="@drawable/ic_plus_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+                <View style="@style/ViewDivider"
+                    android:layout_width="match_parent"
+                    android:paddingTop="5dp"
+                    android:layout_height="0.5dp"/>
+            </LinearLayout>
+</layout>
