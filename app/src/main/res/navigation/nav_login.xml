@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_home.xml"
+    app:startDestination="@id/enter_screen">
+
+    <fragment
+        android:id="@+id/enter_screen"
+        android:name="com.rossgramm.rossapp.login.ui.EnterFragment"
+        android:label="enter" />
+
+    <fragment
+        android:id="@+id/signup_screen"
+        android:name="com.rossgramm.rossapp.login.ui.SignUpFragment"
+        android:label="signup" />
+
+</navigation>
