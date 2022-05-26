@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.rossgramm.rossapp.databinding.FragmentRegistrationBinding
+import com.rossgramm.rossapp.databinding.FragmentSignupBinding
 
-class RegistrationFragment : Fragment() {
+class SignUpFragment : Fragment() {
 
-    private var _binding: FragmentRegistrationBinding? = null
+    private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,7 +19,7 @@ class RegistrationFragment : Fragment() {
     ): View {
 
 
-        _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
+        _binding = FragmentSignupBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
     }
@@ -28,7 +28,6 @@ class RegistrationFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 
 
 }

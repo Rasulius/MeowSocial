@@ -1,16 +1,17 @@
 package com.rossgramm.rossapp.base.web
 
 import com.google.gson.GsonBuilder
+import com.rossgramm.rossapp.base.web.interceptors.ApiTokenInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object WebApi  {
-    private const val  BASE_URL ="http://rossapp.ru"
+object WebApi {
+    private const val BASE_URL = "http://89.208.222.110"
 
-    fun getRetrofit(): Retrofit {
+    fun getRetrofit(withTokenInterceptor: Boolean = true): Retrofit {
         val httpClient = createOkHttpClient()
         val builder = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -26,11 +27,12 @@ object WebApi  {
         return GsonConverterFactory.create(gson)
     }
 
-    private fun createOkHttpClient(): OkHttpClient {
+    private fun createOkHttpClient(withTokenInterceptor: Boolean = true): OkHttpClient {
         val httpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder().apply {
             //TODO: remove in prod version
 
             addInterceptor(getLoggingInterceptor())
+            if(withTokenInterceptor)addInterceptor(ApiTokenInterceptor())
         }
         return httpClientBuilder.build()
     }
