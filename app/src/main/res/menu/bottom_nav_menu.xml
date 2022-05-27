@@ -13,7 +13,7 @@
     <!-- делаем неактивной середину -->
     <item
         android:id="@+id/empty"
-        android:icon="@drawable/ic_main_svg"
+        android:icon="@drawable/ic_main"
         android:enabled="true"
         android:title="Создать" />
     <item

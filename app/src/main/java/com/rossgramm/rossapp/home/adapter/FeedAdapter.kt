@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rossgramm.rossapp.R
 import com.rossgramm.rossapp.base.common.LoadRandomImageFromAssets
 import com.rossgramm.rossapp.home.data.Post
-import org.w3c.dom.Text
 
+//TODO: добавить view binding
 
 class FeedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -40,13 +40,13 @@ class FeedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             ContentType.FRIENDS -> {
                 val friendHolder = FriendViewHolder(LayoutInflater
                     .from(parent.context)
-                    .inflate(R.layout.friends_first_element_home, parent, false))
+                    .inflate(R.layout.item_friends_first_element_home, parent, false))
                return friendHolder
             }
             ContentType.CARD ->{
                 return CardViewHolder(LayoutInflater
                     .from(parent.context)
-                    .inflate(R.layout.home_post, parent, false))
+                    .inflate(R.layout.item_home_post, parent, false))
             }
         }
     }
@@ -87,6 +87,6 @@ enum class ContentType(val value: Int){
     FRIENDS(0),
     CARD(1);
     companion object {
-        fun fromInt(value: Int) = ContentType.values().first { it.value == value }
+        fun fromInt(value: Int) = values().first { it.value == value }
     }
 }

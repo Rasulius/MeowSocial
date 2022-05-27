@@ -27,23 +27,22 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val home =  ViewModelProvider(this).get(HomeViewModel::class.java)
         home.loadPosts()
-
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        val root: View = binding.root
         val adapter = FeedAdapter()
         val postsView: RecyclerView = binding.postFeed
         postsView.layoutManager = LinearLayoutManager(context)
         postsView.adapter = adapter
-
         home.posts.observe(viewLifecycleOwner) {
             adapter.updatePosts(it)
             binding.postFeed.adapter?.notifyDataSetChanged()
         }
-
-        return root
     }
 
     override fun onDestroyView() {

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rossgramm.rossapp.dashboard.data.AlbumItem
 import com.rossgramm.rossapp.home.data.Post
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,7 +39,7 @@ class DashboardViewModel : ViewModel() {
 
     fun loadAlbums() {
         // This is a coroutine scope with the lifecycle of the ViewModel
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             getFakePosts()
             val viewData = getFakePosts()
             _album.postValue(viewData)
