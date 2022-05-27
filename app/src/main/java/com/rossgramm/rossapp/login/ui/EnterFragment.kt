@@ -34,7 +34,7 @@ class EnterFragment : Fragment() {
         //
 
         binding.loginButton.setOnClickListener {
-            launchSignInFlow()
+            goToMainScreen()
         }
         return root
     }
@@ -65,6 +65,10 @@ class EnterFragment : Fragment() {
                 }
             }
 
+            viewModel.toHomeScreenLiveData.observe(viewLifecycleOwner){
+                goToMainScreen()
+            }
+
             val afterTextChanged: (String) -> Unit = {
                 viewModel.inputDataChanged(
                     usernameEt.text.toString(),
@@ -84,7 +88,7 @@ class EnterFragment : Fragment() {
         }
     }
 
-    private fun launchSignInFlow() {
+    private fun goToMainScreen() {
         val homePage = Intent(context, MainActivity::class.java)
         startActivity(homePage)
     }

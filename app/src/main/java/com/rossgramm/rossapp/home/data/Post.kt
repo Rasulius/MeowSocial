@@ -1,6 +1,5 @@
 package com.rossgramm.rossapp.home.data
 
-import com.rossgramm.rossapp.login.data.model.LoggedInUser
 
 /**
  * Данный класс описывает единичный пост. *
@@ -21,5 +20,7 @@ data class Post(
     var author: String? = null,
     var address: String? = null,
     var picture_url: String? = null,
-    var user : LoggedInUser? = LoggedInUser("1", "default_user")
-)
+    var user : RossgrammUser? = RossgrammUser("1", "default_user")
+){
+    class RossgrammUser( val id:String, val name :String )
+}

@@ -1,5 +1,11 @@
 <resources>
 
+    <string name="app_name">RossApp</string>
+
+    <string name="title_home">Домой</string>
+    <string name="title_dashboard">Поиск</string>
+    <string name="title_notifications">Notifications</string>
+
     <string name="empty_string" />
 
     <!--Login screen-->
@@ -21,6 +27,10 @@
     <string name="nickname_key">Введите ключ</string>
     <string name="not_robot">Я не робот</string>
 
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="Search">Поиск</string>
     <string name="ryta_account">"@ryta_permyakova"</string>
     <string name="gorodnaneve">"gorodnaneve Люблю тебя, Петра творенье, Люблю твой строгий, стройный вид... ещё"</string>
     <string name="TODO">"to_do"</string>

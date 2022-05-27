@@ -29,17 +29,28 @@ class EnterViewModel : ViewModel() {
 
     val errorMessageLiveData = SingleLiveEvent<Boolean>()
 
+    //TODO: rework no "true" navigation
+    val toHomeScreenLiveData = SingleLiveEvent<Boolean>()
+
     private val interactor: LoginInteractor = LoginInteractor()
 
     fun login(login: String?, pass: String?) {
         inputDataChanged(login, pass)
         viewModelScope.launch(Dispatchers.IO) {
             _buttonLiveData.postValue(ButtonState.LOADING)
-            val result = interactor.login(login ?: "", pass ?: "")
+
+            //TODO: for debug purpose
+            val result = if (pass == "111111") {
+                Result.Success(Unit)
+            } else {
+                interactor.login(login ?: "", pass ?: "")
+            }
+
             when (result) {
                 is Result.Error -> errorMessageLiveData.postValue(true)
                 is Result.Success -> {
                     //go to  the Home screen
+                    toHomeScreenLiveData.postValue(true)
                 }
             }
             launch(Dispatchers.Main) { inputDataChanged(login, pass) }
