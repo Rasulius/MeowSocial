@@ -12,3 +12,6 @@ sealed class Result<out T : Any> {
         }
     }
 }
+
+//TODO: add different types and handling
+class DomainException : Exception()
