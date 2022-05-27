@@ -81,7 +81,7 @@
 
     <style name="PhotoGridLayout">
         <item name="android:drawSelectorOnTop">true</item>
-        <item name="android:listSelector">@drawable/photo_grid_list_selector</item>
+        <item name="android:listSelector">@drawable/selector_photo_grid_list</item>
     </style>
 
     <style name="small_font">

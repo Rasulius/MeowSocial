@@ -1,10 +1,12 @@
 package com.rossgramm.rossapp.ui.home
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.rossgramm.rossapp.home.data.Post
 import com.rossgramm.rossapp.ui.common.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,6 +20,7 @@ class HomeViewModel: BaseViewModel() {
 
     private val _posts = MutableLiveData<List<Post>>(emptyList())
 
+    @SuppressLint("SimpleDateFormat")
     private fun getFakePosts(): List<Post>{
 
         val randomPosts: MutableList<Post> = mutableListOf()
@@ -46,7 +49,7 @@ class HomeViewModel: BaseViewModel() {
 
     fun loadPosts() {
         // This is a coroutine scope with the lifecycle of the ViewModel
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             getFakePosts()
             val viewData = getFakePosts()
             _posts.postValue(viewData)
