@@ -25,8 +25,10 @@ class HomeViewModel : BaseViewModel() {
         get() = _posts
 
     private val _posts = MutableLiveData<List<Post>>(emptyList())
-    val randomPosts: MutableList<Post> = mutableListOf()
+    val generatedPostMutableList: MutableList<Post> = mutableListOf()
     val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+    val currentDate = sdf.format(Date())
+    val generatedPost = Post()
 
     @SuppressLint("SimpleDateFormat")
     private suspend fun getPostsFromApi(): List<Post> {
@@ -35,44 +37,40 @@ class HomeViewModel : BaseViewModel() {
         } else {
             createRealPost() //заполнение списка постов реальными данными с api
         }
-        return randomPosts
+        return generatedPostMutableList
     }
 
     private suspend fun createRealPost() {
         val response =
             getPostsApiService.getPostsList(1, 10, "Bearer " + SessionManager.getAccessToken())
         for (post in response.posts) {
-            val newRandomPost = Post()
-            val currentDate = sdf.format(Date())
-            newRandomPost.author = post.owner.nickname
-            newRandomPost.canLike = true //временно - позже будет возможность отключить возможность лайкнуть
-            newRandomPost.created_time = post.createdAt
-            newRandomPost.isHidden = false //временно - позже будет возможность скрывать посты
-            newRandomPost.message = post.id.toString() + " - " + post.comment //id был добавлен для тестов
-            newRandomPost.address = "Санкт-Петербург, Россия" // временно - позже будет реальное местоположение
-            newRandomPost.picture_url =
+            generatedPost.author = post.owner.nickname
+            generatedPost.canLike = true //временно - позже будет возможность отключить возможность лайкнуть
+            generatedPost.created_time = post.createdAt
+            generatedPost.isHidden = false //временно - позже будет возможность скрывать посты
+            generatedPost.message = post.id.toString() + " - " + post.comment //id был добавлен для тестов
+            generatedPost.address = "Санкт-Петербург, Россия" // временно - позже будет реальное местоположение
+            generatedPost.picture_url =
                 post.attachments[0].file.link //временно - позже будет реализована карусель
-            newRandomPost.updated_time = currentDate
-            newRandomPost.username = post.owner.nickname //в адаптере дублируется
-            randomPosts.add(newRandomPost)
+            generatedPost.updated_time = currentDate
+            generatedPost.username = post.owner.nickname //в адаптере дублируется
+            generatedPostMutableList.add(generatedPost)
         }
     }
 
     private fun createFakePost() {
         for (i in 0..5) {
-            val newRandomPost = Post()
-            val currentDate = sdf.format(Date())
-            newRandomPost.author = "cristina@serbryakova"
-            newRandomPost.canLike = true
-            newRandomPost.created_time = currentDate
-            newRandomPost.isHidden = false
-            newRandomPost.message = "gorodnaneve Люблю тебя, Петра творенье,\n" +
+            generatedPost.author = "cristina@serbryakova"
+            generatedPost.canLike = true
+            generatedPost.created_time = currentDate
+            generatedPost.isHidden = false
+            generatedPost.message = "gorodnaneve Люблю тебя, Петра творенье,\n" +
                     "Люблю твой строгий, стройный вид... ещё"
-            newRandomPost.address = "Санкт-Петербург, Россия"
-            newRandomPost.picture_url = null
-            newRandomPost.updated_time = currentDate
-            newRandomPost.username = "Кристина"
-            randomPosts.add(newRandomPost)
+            generatedPost.address = "Санкт-Петербург, Россия"
+            generatedPost.picture_url = null
+            generatedPost.updated_time = currentDate
+            generatedPost.username = "Кристина"
+            generatedPostMutableList.add(generatedPost)
         }
     }
 
