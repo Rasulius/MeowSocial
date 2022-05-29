@@ -1,3 +1,5 @@
+package com.rossgramm.rossapp.home.ui
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -5,19 +7,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.rossgramm.rossapp.R
 import com.rossgramm.rossapp.base.common.LoadRandomImageFromAssets
 import com.rossgramm.rossapp.home.data.Post
 
 //TODO: добавить view binding
 
-class FeedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FeedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var posts: List<Post> = mutableListOf()
     private lateinit var context: Context
 
     // Базовый класс контента
-    open class BaseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     class CardViewHolder(itemView: View) : BaseViewHolder(itemView) {
         val nickname: TextView = itemView.findViewById(R.id.home_nickname)
@@ -29,24 +32,28 @@ class FeedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val homeBurger: TextView = itemView.findViewById(R.id.home_burger)
     }
 
-    class FriendViewHolder(itemView: View): BaseViewHolder(itemView) {
+    class FriendViewHolder(itemView: View) : BaseViewHolder(itemView) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
 
-        when(ContentType.fromInt(viewType)){
+        when (ContentType.fromInt(viewType)) {
             ContentType.FRIENDS -> {
-                val friendHolder = FriendViewHolder(LayoutInflater
-                    .from(parent.context)
-                    .inflate(R.layout.item_friends_first_element_home, parent, false))
-               return friendHolder
+                val friendHolder = FriendViewHolder(
+                    LayoutInflater
+                        .from(parent.context)
+                        .inflate(R.layout.item_friends_first_element_home, parent, false)
+                )
+                return friendHolder
             }
-            ContentType.CARD ->{
-                return CardViewHolder(LayoutInflater
-                    .from(parent.context)
-                    .inflate(R.layout.item_home_post, parent, false))
+            ContentType.CARD -> {
+                return CardViewHolder(
+                    LayoutInflater
+                        .from(parent.context)
+                        .inflate(R.layout.item_home_post, parent, false)
+                )
             }
         }
     }
@@ -70,22 +77,28 @@ class FeedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         // Первый элемент список друзей
-        if (position>0){
+        if (position > 0) {
             val temp = holder as CardViewHolder
             temp.nickname.text = posts[position].author
             temp.userAddress.text = posts[position].address
             temp.comments.text = posts[position].message
             temp.homeBurger.text = "..."
             temp.viewComment.text = "Просмотреть все комментарии..."
-            LoadRandomImageFromAssets(temp.postImage, context).loadImage()
+            if (posts[position].picture_url == null) {
+                LoadRandomImageFromAssets(temp.postImage, context).loadImage() //временно для тестов
+            } else {
+                Glide.with(temp.postImage)
+                    .load(posts[position].picture_url)
+                    .into(temp.postImage)
+            }
         }
     }
-
 }
 
-enum class ContentType(val value: Int){
+enum class ContentType(val value: Int) {
     FRIENDS(0),
     CARD(1);
+
     companion object {
         fun fromInt(value: Int) = values().first { it.value == value }
     }

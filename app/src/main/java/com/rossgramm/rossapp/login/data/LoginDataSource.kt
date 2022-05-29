@@ -14,7 +14,9 @@ class LoginDataSource {
 
     @Throws(Exception::class)
     suspend fun signin(username: String, password: String): LoginResponse {
-        return loginApiService.signin(LoginRequest(username, password))
+    //for tests
+    //return loginApiService.signin(LoginRequest(username, password))
+        return loginApiService.signin(login = username, password = password)
     }
 
     fun logout() {

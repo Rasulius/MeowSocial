@@ -12,8 +12,16 @@ interface LoginAPI {
         //private const val LOGIN_CONFIG_PATH = "/loginConfig"
     }
 
+//временно изменил способ singIn - позже политика работы сервера будет пересмотрена
+
+//    @POST(LOGIN_PATH)
+//    suspend fun signin(@Body request: LoginRequest): LoginResponse
+
     @POST(LOGIN_PATH)
-    suspend fun signin(@Body request: LoginRequest): LoginResponse
+    suspend fun signin(
+        @Query("login") login: String,
+        @Query("password") password: String
+    ): LoginResponse
 
     @POST(SIGNUP_PATH)
     suspend fun signup(@Body request: RegisterRequest): RegisterResponse
@@ -41,9 +49,9 @@ class LoginResponse(
         val avatarLink: String?,
         val name: String?,
         val bio: String?,
-        val followerCount: Int = 0,
-        val followingCount: Int = 0,
-        val postsCount: Int = 0
+        val followerCount: Int,
+        val followingCount: Int,
+        val postsCount: Int
     )
 }
 

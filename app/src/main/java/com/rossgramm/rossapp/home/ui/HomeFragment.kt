@@ -1,6 +1,5 @@
-package com.rossgramm.rossapp.ui.home
+package com.rossgramm.rossapp.home.ui
 
-import FeedAdapter
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
