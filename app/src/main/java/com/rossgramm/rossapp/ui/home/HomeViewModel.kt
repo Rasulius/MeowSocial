@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.tasks.OnFailureListener
 import com.rossgramm.rossapp.home.data.Post
 import com.rossgramm.rossapp.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +14,7 @@ import java.util.*
 
 // Данный класс (модель, данных посты)
 
-class HomeViewModel: BaseViewModel() {
+class HomeViewModel : BaseViewModel() {
 
     val posts: LiveData<List<Post>>
         get() = _posts
@@ -29,6 +30,7 @@ class HomeViewModel: BaseViewModel() {
             val newRandomPost = Post()
             val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
             val currentDate = sdf.format(Date())
+            newRandomPost.id = i.toString()
             newRandomPost.author = "cristina@serbryakova"
             newRandomPost.canLike = true
             newRandomPost.created_time = currentDate
@@ -50,7 +52,6 @@ class HomeViewModel: BaseViewModel() {
     fun loadPosts() {
         // This is a coroutine scope with the lifecycle of the ViewModel
         viewModelScope.launch(Dispatchers.IO) {
-            getFakePosts()
             val viewData = getFakePosts()
             _posts.postValue(viewData)
         }

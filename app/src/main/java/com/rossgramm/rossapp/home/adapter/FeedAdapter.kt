@@ -11,7 +11,11 @@ import com.rossgramm.rossapp.home.data.Post
 
 //TODO: добавить view binding
 
-class FeedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FeedAdapter(private val listener: Listener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    interface Listener {
+        fun openComments(postId: String)
+    }
 
     private var posts: List<Post> = mutableListOf()
     private lateinit var context: Context
@@ -24,6 +28,7 @@ class FeedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val userAddress: TextView = itemView.findViewById(R.id.user_address)
         val comments: TextView = itemView.findViewById(R.id.post_comment)
         val postImage: ImageView = itemView.findViewById(R.id.post_image)
+        // Просмотреть все комментарии
         val viewComment: TextView = itemView.findViewById(R.id.view_the_comment)
         //Кнопка меню '...'
         val homeBurger: TextView = itemView.findViewById(R.id.home_burger)
@@ -77,6 +82,11 @@ class FeedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             temp.comments.text = posts[position].message
             temp.homeBurger.text = "..."
             temp.viewComment.text = "Просмотреть все комментарии..."
+            // Обрабатываем открытие комментария
+            temp.viewComment.setOnClickListener {
+                val postID = posts[position].id
+                listener.openComments(postID!!)
+            }
             LoadRandomImageFromAssets(temp.postImage, context).loadImage()
         }
     }

@@ -26,7 +26,10 @@
     <string name="no_account_question">У вас еще нет аккаунта?</string>
     <string name="nickname_key">Введите ключ</string>
     <string name="not_robot">Я не робот</string>
-
+    <!--Comment CommentsFrame -->
+    <string name="return_image">Вернуться</string>
+    <string name="comments">Комментарии</string>string>
+    <string name="send_by_this_comments">Ответить</string>string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
@@ -34,5 +37,6 @@
     <string name="ryta_account">"@ryta_permyakova"</string>
     <string name="gorodnaneve">"gorodnaneve Люблю тебя, Петра творенье, Люблю твой строгий, стройный вид... ещё"</string>
     <string name="TODO">"to_do"</string>
+    <string name="title_comments">comments</string>
 
 </resources>

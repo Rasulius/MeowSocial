@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <import type="android.view.View.OnClickListener" />
-        <variable name="clickListener" type="android.view.View.OnClickListener"/>
-        <variable
-            name="actionsListener"
-            type="com.rossgramm.rossapp.ui.post.PostItemUserActionsListener"/>
-        <variable name="post" type="com.rossgramm.rossapp.home.data.Post"/>
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_post_item"
         android:layout_width="match_parent"
@@ -229,4 +222,4 @@
             app:layout_constraintTop_toBottomOf="@+id/post_comment" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
