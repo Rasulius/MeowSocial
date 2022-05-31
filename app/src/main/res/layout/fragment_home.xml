@@ -27,7 +27,6 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_infinity"
                 tools:ignore="MissingConstraints" />
 
             <ImageView

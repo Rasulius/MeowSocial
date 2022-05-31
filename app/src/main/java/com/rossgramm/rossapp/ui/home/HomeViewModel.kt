@@ -1,4 +1,4 @@
-package com.rossgramm.rossapp.home.ui
+package com.rossgramm.rossapp.ui.home
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
@@ -84,8 +84,3 @@ class HomeViewModel : BaseViewModel() {
     }
 
 }
-
-
-
-
-
