@@ -52,9 +52,9 @@ class HomeFragment : Fragment(), FeedAdapter.Listener {
         super.onDestroyView()
         _binding = null
     }
-  // Открываем комментарии
+    // Открываем комментарии
     override fun openComments(postId: String) {
-      // TODO надо передать id поста фрагменту, чтобы по нему открывались комментарии
+        // TODO надо передать id поста фрагменту, чтобы по нему открывались комментарии
 
         findNavController().navigate(R.id.navigation_comment)
     }

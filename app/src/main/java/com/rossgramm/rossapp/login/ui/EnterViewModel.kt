@@ -1,5 +1,6 @@
 package com.rossgramm.rossapp.login.ui
 
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -57,6 +58,7 @@ class EnterViewModel : ViewModel() {
         }
     }
 
+
     fun inputDataChanged(login: String?, password: String?) {
         val isLoginValid = checkLogin(login)
         val isPassLogin = checkPass(password)
@@ -65,7 +67,9 @@ class EnterViewModel : ViewModel() {
     }
 
     private fun checkLogin(login: String?): Boolean {
-        val isValid = Patterns.EMAIL_ADDRESS.matcher(login).matches()
+        //для тестов убрал валидацию логина (в будущем будет возможность вводить не только email, но и никнейм
+        //val isValid = Patterns.EMAIL_ADDRESS.matcher(login).matches()
+        val isValid = true
         val isEmpty = login.isNullOrEmpty()
         _userInputErrorLiveData.value = if (!isValid && !isEmpty) InputError.Incorrect else null
         return isValid

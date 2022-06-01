@@ -9,7 +9,6 @@ import com.rossgramm.rossapp.comments.data.Comment
 import com.rossgramm.rossapp.comments.data.FeedPostsRepository
 import com.rossgramm.rossapp.ui.common.BaseViewModel
 import com.rossgramm.rossapp.user.data.User
-import com.google.android.gms.tasks.OnFailureListener
 import com.rossgramm.rossapp.user.data.UsersRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,7 +23,6 @@ class CommentsViewModel() :
 
     private lateinit var feedPostsRepo: FeedPostsRepository
     private lateinit var usersRepo: UsersRepository
-    private lateinit var onFailureListener: OnFailureListener
 
     val comments: LiveData<List<Comment>>
         get() = _comments
