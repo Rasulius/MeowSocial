@@ -15,39 +15,28 @@ import com.rossgramm.rossapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var appBarConfiguration : AppBarConfiguration
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_fragment_nav) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.home_fragment_nav) as NavHostFragment
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
-        //setupActionBar(navController, appBarConfiguration)
         setupBottomNavMenu(navController)
-        // прячем и показываем меню, если у нас вид на всю страницу
-        hideAndUnHideNavigationMenu(navController)
-
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
         val bottomNav = findViewById<BottomNavigationView>(R.id.nav_view)
         bottomNav?.setupWithNavController(navController)
-    }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            // Для блока комментариев скрваем навигацию. Включаем когда возвращаемся обратно
+            binding.navView.visibility =
+                if (destination.id == R.id.navigation_comment) View.GONE else View.VISIBLE
 
-    private fun hideAndUnHideNavigationMenu(navController: NavController) {
-        // Для блока комментариев скрваем навигацию. Включаем когда возвращаемся обратно
-        val bottomNav = findViewById<BottomNavigationView>(R.id.nav_view)
-        navController.addOnDestinationChangedListener { TODO , destination, _ ->
-            // TODO Узнать как называется фрагмент комментария.
-            // по названию не срабатывает? внимание быдлкод!!!
-            if (destination.id == 2131296621) {
-                bottomNav.visibility = View.GONE
-            } else {
-                bottomNav.visibility = View.VISIBLE
-            }
         }
     }
 

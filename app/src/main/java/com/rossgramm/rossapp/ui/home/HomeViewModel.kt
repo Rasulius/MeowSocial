@@ -60,6 +60,7 @@ class HomeViewModel : BaseViewModel() {
 
     private fun createFakePost() {
         for (i in 0..5) {
+            generatedPost.id="1212${i}"
             generatedPost.author = "cristina@serbryakova"
             generatedPost.canLike = true
             generatedPost.created_time = currentDate

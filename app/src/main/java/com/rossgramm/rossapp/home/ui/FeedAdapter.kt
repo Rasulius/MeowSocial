@@ -12,7 +12,8 @@ import com.rossgramm.rossapp.home.data.Post
 
 //TODO: добавить view binding
 
-class FeedAdapter(private val listener: Listener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FeedAdapter(private val listener: Listener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     interface Listener {
         fun openComments(postId: String)
@@ -29,8 +30,10 @@ class FeedAdapter(private val listener: Listener): RecyclerView.Adapter<Recycler
         val userAddress: TextView = itemView.findViewById(R.id.user_address)
         val comments: TextView = itemView.findViewById(R.id.post_comment)
         val postImage: ImageView = itemView.findViewById(R.id.post_image)
+
         // Просмотреть все комментарии
         val viewComment: TextView = itemView.findViewById(R.id.view_the_comment)
+
         //Кнопка меню '...'
         val homeBurger: TextView = itemView.findViewById(R.id.home_burger)
     }

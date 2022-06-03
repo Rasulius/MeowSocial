@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.rossgramm.rossapp.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
@@ -18,7 +18,7 @@
             app:destination="@id/navigation_notifications" />
         <action
             android:id="@+id/action_navigation_home_to_navigation_comment"
-            app:destination="@id/navigation_comment" />
+            app:destination="@id/navigation_comment"/>
     </fragment>
 
     <fragment
@@ -37,6 +37,11 @@
         android:id="@+id/navigation_comment"
         android:name="com.rossgramm.rossapp.ui.comments.CommentsFragment"
         android:label="@string/title_comments"
-        tools:layout="@layout/fragment_comments" />
+        tools:layout="@layout/fragment_comments">
+        <argument
+            android:name="post_id"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 
 </navigation>

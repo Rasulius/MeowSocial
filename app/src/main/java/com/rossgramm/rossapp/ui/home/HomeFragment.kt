@@ -35,7 +35,7 @@ class HomeFragment : Fragment(), FeedAdapter.Listener {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val home =  ViewModelProvider(this).get(HomeViewModel::class.java)
+        val home = ViewModelProvider(this).get(HomeViewModel::class.java)
         home.loadPosts()
         val adapter = FeedAdapter(this)
         val postsView: RecyclerView = binding.postFeed
@@ -54,8 +54,7 @@ class HomeFragment : Fragment(), FeedAdapter.Listener {
     }
     // Открываем комментарии
     override fun openComments(postId: String) {
-        // TODO надо передать id поста фрагменту, чтобы по нему открывались комментарии
-
-        findNavController().navigate(R.id.navigation_comment)
+        val action = HomeFragmentDirections.actionNavigationHomeToNavigationComment(postId)
+        findNavController().navigate(action)
     }
 }

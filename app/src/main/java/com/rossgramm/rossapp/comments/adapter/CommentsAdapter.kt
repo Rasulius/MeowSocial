@@ -31,6 +31,7 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>
     fun updateComments(newComments: List<Comment>) {
         //val diffResult = DiffUtil.calculateDiff(SimpleCallback(comments, newComments) {it.id})
         this.comments = newComments
+        notifyDataSetChanged()
         //diffResult.dispatchUpdatesTo(this)
     }
 
