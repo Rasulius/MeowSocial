@@ -39,7 +39,7 @@ class CommentsFragment: Fragment() {
         //TODO: use postId
         // Здесь заполняем
         val commentsProvider =  ViewModelProvider(this).get(CommentsViewModel::class.java)
-        commentsProvider.loadComments()
+        commentsProvider.loadComments(postId)
         val adapter = CommentsAdapter()
         val commentsView: RecyclerView = binding.commentsFeed
         commentsView.layoutManager = LinearLayoutManager(context)

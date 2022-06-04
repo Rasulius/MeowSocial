@@ -18,6 +18,7 @@ data class PostContent(
 
 data class Owner(
     var nickname: String,
+    var avatarLink: String,
     var isVerified: Boolean,
     var id: Int
 )

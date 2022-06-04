@@ -1,6 +1,7 @@
 package com.rossgramm.rossapp.ui.home
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -28,7 +29,6 @@ class HomeViewModel : BaseViewModel() {
     val generatedPostMutableList: MutableList<Post> = mutableListOf()
     val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
     val currentDate = sdf.format(Date())
-    val generatedPost = Post()
 
     @SuppressLint("SimpleDateFormat")
     private suspend fun getPostsFromApi(): List<Post> {
@@ -42,24 +42,32 @@ class HomeViewModel : BaseViewModel() {
 
     private suspend fun createRealPost() {
         val response =
-            getPostsApiService.getPostsList(1, 10, "Bearer " + SessionManager.getAccessToken())
+            getPostsApiService.getPostsList("Bearer " + SessionManager.getAccessToken())
         for (post in response.posts) {
-            generatedPost.author = post.owner.nickname
-            generatedPost.canLike = true //временно - позже будет возможность отключить возможность лайкнуть
+            val generatedPost = Post()
+            generatedPost.id = post.id.toString()
             generatedPost.created_time = post.createdAt
-            generatedPost.isHidden = false //временно - позже будет возможность скрывать посты
-            generatedPost.message = post.id.toString() + " - " + post.comment //id был добавлен для тестов
-            generatedPost.address = "Санкт-Петербург, Россия" // временно - позже будет реальное местоположение
-            generatedPost.picture_url =
-                post.attachments[0].file.link //временно - позже будет реализована карусель
             generatedPost.updated_time = currentDate
-            generatedPost.username = post.owner.nickname //в адаптере дублируется
+            generatedPost.message = post.comment
+            generatedPost.isHidden = false
+            generatedPost.likes = emptyList()
+            generatedPost.canLike = true
+            generatedPost.username = post.owner.nickname
+            generatedPost.author = post.owner.nickname
+            generatedPost.authorAvatar = post.owner.avatarLink
+            generatedPost.address = "Санкт-Петербург, Россия"
+            generatedPost.picture_url = post.attachments[0].file.link
+            generatedPost.user?.id = post.owner.id.toString()
+            generatedPost.user?.name = post.owner.nickname
+            generatedPost.user?.avatarLink = post.owner.avatarLink
             generatedPostMutableList.add(generatedPost)
+            Log.d("MyApp", generatedPost.toString())
         }
     }
 
     private fun createFakePost() {
         for (i in 0..5) {
+            val generatedPost = Post()
             generatedPost.id="1212${i}"
             generatedPost.author = "cristina@serbryakova"
             generatedPost.canLike = true
@@ -83,5 +91,4 @@ class HomeViewModel : BaseViewModel() {
             _posts.postValue(viewData)
         }
     }
-
 }

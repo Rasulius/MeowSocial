@@ -10,7 +10,8 @@ data class Comment(
     var username: String = "",
     var photo: String? = null,
     var text: String = "",
-    var timestamp: String = ""
+    var timestamp: String = "",
+    var postCommentId: String = ""
 ) {
     fun timestampDate() = Date(timestamp as Long)
 

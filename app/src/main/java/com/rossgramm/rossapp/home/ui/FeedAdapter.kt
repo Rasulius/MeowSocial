@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 import com.rossgramm.rossapp.R
 import com.rossgramm.rossapp.base.common.LoadRandomImageFromAssets
 import com.rossgramm.rossapp.home.data.Post
@@ -30,6 +31,7 @@ class FeedAdapter(private val listener: Listener) :
         val userAddress: TextView = itemView.findViewById(R.id.user_address)
         val comments: TextView = itemView.findViewById(R.id.post_comment)
         val postImage: ImageView = itemView.findViewById(R.id.post_image)
+        val userAvatar: ImageView = itemView.findViewById(R.id.iv_avatar)
 
         // Просмотреть все комментарии
         val viewComment: TextView = itemView.findViewById(R.id.view_the_comment)
@@ -87,6 +89,17 @@ class FeedAdapter(private val listener: Listener) :
             val temp = holder as CardViewHolder
             temp.nickname.text = posts[position].author
             temp.userAddress.text = posts[position].address
+
+            if (posts[position].authorAvatar == null) {
+                Glide.with(temp.userAvatar)
+                    .load(R.drawable.ic_unsetted_avatar)
+                    .into(temp.userAvatar)
+            } else {
+                Glide.with(temp.userAvatar)
+                    .load(posts[position].authorAvatar)
+                    .into(temp.userAvatar)
+            }
+
             temp.comments.text = posts[position].message
             temp.homeBurger.text = "..."
             temp.viewComment.text = "Просмотреть все комментарии..."
