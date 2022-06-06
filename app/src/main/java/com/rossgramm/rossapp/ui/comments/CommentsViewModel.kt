@@ -1,7 +1,6 @@
 package com.rossgramm.rossapp.ui.comments
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,15 +10,13 @@ import com.rossgramm.rossapp.comments.data.FeedPostsRepository
 import com.rossgramm.rossapp.comments.data.webAPI.GetCommentListAPI
 import com.rossgramm.rossapp.managers.SessionManager
 import com.rossgramm.rossapp.ui.common.BaseViewModel
-import com.rossgramm.rossapp.user.data.User
 import com.rossgramm.rossapp.user.data.UsersRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 import java.util.*
+
 
 // Модель комментария
 
@@ -60,24 +57,38 @@ class CommentsViewModel() :
     }
 
     private suspend fun getRealСomments(postId: String) {
-        val response =
-            getCommentsApiService.getCommentList(
-                postId,
-                "Bearer " + SessionManager.getAccessToken()
-            )
-        for (comment in response.comments) {
-            val newRealComment = Comment()
-            newRealComment.postCommentId = comment.id.toString()
-            newRealComment.uid = comment.owner.id.toString()
-            newRealComment.username = comment.owner.nickname
-            newRealComment.photo = comment.owner.avatarLink
-            newRealComment.text = comment.text
-            newRealComment.timestamp = comment.createdAt
-            commentList.add(newRealComment)
+        try {
+            val response = getCommentsApiService.getCommentList(postId)
+            response.comments.forEach { comment ->
+                val newRealComment = Comment().apply {
+                    postCommentId = comment.id.toString()
+                    uid = comment.owner.id.toString()
+                    username = comment.owner.nickname
+                    photo = comment.owner.avatarLink
+                    text = comment.text
+                    timestamp = comment.createdAt
+                }
+                commentList.add(newRealComment)
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Log.d("MyApp", "Server get comments error")
+            getErrorComment()
         }
     }
 
-    private fun getFakeСomments(): List<Comment> {
+    private fun getErrorComment() {
+        val errorComment = Comment()
+        errorComment.postCommentId = "unknown"
+        errorComment.uid = "unknown"
+        errorComment.username = "unknown"
+        errorComment.photo = null
+        errorComment.text = "Connection error. Please try later."
+        errorComment.timestamp = currentDate
+        commentList.add(errorComment)
+    }
+
+    private fun getFakeСomments() {
         val commentsData = arrayOf(
             "великолепная статья!!!!",
             "статья огонь",
@@ -96,7 +107,6 @@ class CommentsViewModel() :
             newFakeComment.timestamp = currentDate
             commentList.add(newFakeComment)
         }
-        return commentList
     }
 
 //    @RequiresApi(Build.VERSION_CODES.O)

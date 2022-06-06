@@ -12,6 +12,5 @@ interface GetCommentListAPI {
         @Query("PostId") PostId: String,
 //        @Query("Offset") Offset: Int,  //нужно в будущем для пагинации
 //        @Query("Limit") Limit: Int,    //нужно в будущем для пагинации
-        @Header("Authorization") Authorization: String
     ): CommentListModel
 }

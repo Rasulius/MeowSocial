@@ -11,6 +11,5 @@ interface GetPostListAPI {
     suspend fun getPostsList(
 //        @Query("Offset") Offset: Int,  //нужно в будущем для пагинации
 //        @Query("Limit") Limit: Int,    //нужно в будущем для пагинации
-        @Header("Authorization") Authorization: String
     ): PostListModel
 }

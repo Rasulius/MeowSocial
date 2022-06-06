@@ -6,12 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.rossgramm.rossapp.base.web.WebApi
+import com.rossgramm.rossapp.comments.data.Comment
 import com.rossgramm.rossapp.home.data.Post
 import com.rossgramm.rossapp.home.data.webAPI.GetPostListAPI
 import com.rossgramm.rossapp.managers.SessionManager
 import com.rossgramm.rossapp.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,34 +43,54 @@ class HomeViewModel : BaseViewModel() {
     }
 
     private suspend fun createRealPost() {
-        val response =
-            getPostsApiService.getPostsList("Bearer " + SessionManager.getAccessToken())
-        for (post in response.posts) {
-            val generatedPost = Post()
-            generatedPost.id = post.id.toString()
-            generatedPost.created_time = post.createdAt
-            generatedPost.updated_time = currentDate
-            generatedPost.message = post.comment
-            generatedPost.isHidden = false
-            generatedPost.likes = emptyList()
-            generatedPost.canLike = true
-            generatedPost.username = post.owner.nickname
-            generatedPost.author = post.owner.nickname
-            generatedPost.authorAvatar = post.owner.avatarLink
-            generatedPost.address = "Санкт-Петербург, Россия"
-            generatedPost.picture_url = post.attachments[0].file.link
-            generatedPost.user?.id = post.owner.id.toString()
-            generatedPost.user?.name = post.owner.nickname
-            generatedPost.user?.avatarLink = post.owner.avatarLink
-            generatedPostMutableList.add(generatedPost)
-            Log.d("MyApp", generatedPost.toString())
+        try {
+            val response = getPostsApiService.getPostsList()
+            response.posts.forEach { post ->
+                val generatedPost = Post().apply {
+                    id = post.id.toString()
+                    created_time = post.createdAt
+                    updated_time = currentDate
+                    message = post.comment
+                    isHidden = false
+                    likes = emptyList()
+                    canLike = true
+                    username = post.owner.nickname
+                    author = post.owner.nickname
+                    authorAvatar = post.owner.avatarLink
+                    address = "Санкт-Петербург, Россия"
+                    picture_url = post.attachments[0].file.link
+                    user?.id = post.owner.id.toString()
+                    user?.name = post.owner.nickname
+                    user?.avatarLink = post.owner.avatarLink
+                }
+                generatedPostMutableList.add(generatedPost)
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Log.d("MyApp", "Server get posts error")
+            getErrorPost()
         }
+    }
+
+    private fun getErrorPost() {
+        val errorPost = Post()
+        errorPost.id = "unknown"
+        errorPost.author = "unknown"
+        errorPost.canLike = true
+        errorPost.created_time = currentDate
+        errorPost.isHidden = false
+        errorPost.message = "Connection error. Please try later."
+        errorPost.address = "unknown"
+        errorPost.picture_url = null
+        errorPost.updated_time = currentDate
+        errorPost.username = "unknown"
+        generatedPostMutableList.add(errorPost)
     }
 
     private fun createFakePost() {
         for (i in 0..5) {
             val generatedPost = Post()
-            generatedPost.id="1212${i}"
+            generatedPost.id = "1212${i}"
             generatedPost.author = "cristina@serbryakova"
             generatedPost.canLike = true
             generatedPost.created_time = currentDate

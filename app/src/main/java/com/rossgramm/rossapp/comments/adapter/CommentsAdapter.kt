@@ -30,26 +30,29 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>
 
     override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
         val comment = comments[position]
-        if (comments[position].photo == null) {
-            Glide.with(holder.photo)
-                .load(R.drawable.ic_unsetted_avatar)
-                .into(holder.photo)
-        } else {
-            Glide.with(holder.photo)
-                .load(comments[position].photo)
-                .into(holder.photo)
-        }
+
+        Glide.with(holder.photo)
+            .load(comments[position].photo)
+            .placeholder(R.drawable.ic_unsetted_avatar)
+            .into(holder.photo)
 
         val uid = comment.uid
         val timestamp = comment.timestamp
-        val username = comment.username.plus(" ")
-        val commentText = comment.text
-        val finalCommentString = username + commentText
-        val spannableFinalCommentString = SpannableString (finalCommentString)
-        spannableFinalCommentString.setSpan(StyleSpan(android.graphics.Typeface.BOLD), 0, username.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        holder.comment.setText(spannableFinalCommentString, TextView.BufferType.SPANNABLE)
 
-            //holder.comment.setText(comment.text)
+        StringBuilder().apply {
+            append(comment.username)
+            append(" ")
+            append(comment.text)
+        }.let {
+            val spannableFinalCommentString = SpannableString(it)
+            spannableFinalCommentString.setSpan(
+                StyleSpan(android.graphics.Typeface.BOLD),
+                0,
+                comment.username.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            holder.comment.setText(spannableFinalCommentString, TextView.BufferType.SPANNABLE)
+        }
     }
 
     fun updateComments(newComments: List<Comment>) {

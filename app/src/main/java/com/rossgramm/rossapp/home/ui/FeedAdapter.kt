@@ -90,15 +90,10 @@ class FeedAdapter(private val listener: Listener) :
             temp.nickname.text = posts[position].author
             temp.userAddress.text = posts[position].address
 
-            if (posts[position].authorAvatar == null) {
-                Glide.with(temp.userAvatar)
-                    .load(R.drawable.ic_unsetted_avatar)
-                    .into(temp.userAvatar)
-            } else {
-                Glide.with(temp.userAvatar)
-                    .load(posts[position].authorAvatar)
-                    .into(temp.userAvatar)
-            }
+            Glide.with(temp.userAvatar)
+                .load(posts[position].authorAvatar)
+                .placeholder(R.drawable.ic_unsetted_avatar)
+                .into(temp.userAvatar)
 
             temp.comments.text = posts[position].message
             temp.homeBurger.text = "..."

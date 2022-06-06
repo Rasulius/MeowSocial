@@ -16,7 +16,7 @@ class ApiTokenInterceptor() : Interceptor {
         val  token = SessionManager.getAccessToken()
         val request = if (token != null) {
             chain.request().newBuilder()
-                .header("X-Auth-Token", token)
+                .header("Authorization", "Bearer $token")
                 .url(url)
                 .build()
 
