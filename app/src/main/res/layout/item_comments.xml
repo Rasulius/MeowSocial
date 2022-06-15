@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:id="@+id/layout_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/avatar_comments"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_gravity="left"
+            android:background="@drawable/roundimage"
+            android:contentDescription="@string/TODO"
+            android:src="@mipmap/ic_photo_temp"
+            app:shapeAppearanceOverlay="@style/CornerSize50Percent" />
+            <LinearLayout
+                android:id="@+id/comments_block_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="2dp"
+                android:layout_marginStart="15dp">
+                <TextView
+                    android:id="@+id/comments_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/comments_text"
+                    tools:text="Lorem Ipsum is simply  popularised Lorem Ipsum is simply  popularisedLorem Ipsum is simply  popularisedLorem Ipsum is simply  popularised popularised Lorem Ipsum is simply  popularisedLorem  popularised Lorem Ipsum \n is simply  popularisedLorem "
+                    android:textColor="@color/black"
+                    />
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:weightSum="10">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="100dp"
+                        android:layout_weight="1"
+                        android:text = "17 мин."/>
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="100dp"
+                        android:layout_weight="2"
+                        android:id="@+id/send_comments_by_this"
+                        android:text = "@string/send_by_this_comments"/>
+                </LinearLayout>
+            </LinearLayout>
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

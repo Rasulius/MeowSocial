@@ -2,6 +2,7 @@ package com.rossgramm.rossapp
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -32,10 +33,28 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         //setupActionBar(navController, appBarConfiguration)
         setupBottomNavMenu(navController)
+        // прячем и показываем меню, если у нас вид на всю страницу
+        hideAndUnHideNavigationMenu(navController)
 
     }
 
-   
+
+
+    private fun hideAndUnHideNavigationMenu(navController: NavController) {
+        // Для блока комментариев скрваем навигацию. Включаем когда возвращаемся обратно
+        val bottomNav = findViewById<BottomNavigationView>(R.id.nav_view)
+        navController.addOnDestinationChangedListener { TODO , destination, _ ->
+            // TODO Узнать как называется фрагмент комментария.
+            // по названию не срабатывает? внимание быдлкод!!!
+            if (destination.id == 2131296621) {
+                bottomNav.visibility = View.GONE
+            } else {
+                bottomNav.visibility = View.VISIBLE
+            }
+        }
+    }
+
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val retValue = super.onCreateOptionsMenu(menu)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)

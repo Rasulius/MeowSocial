@@ -82,6 +82,26 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <style name="comments_header">
+        <item name="fontFamily">@font/family_rubik</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name= "android:textStyle">bold</item>
+    </style>
+
+    <style name="comments_text">
+        <item name="fontFamily">@font/family_rubik</item>
+        <item name="android:textColor">@color/inactiveTextColor</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="comments_publish">
+        <item name="fontFamily">@font/family_rubik</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="lightText">
         <item name="android:textColor">@color/inactiveTextColor</item>
     </style>

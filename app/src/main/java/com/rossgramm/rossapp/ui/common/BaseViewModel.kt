@@ -3,6 +3,7 @@ package com.rossgramm.rossapp.ui.common
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.tasks.OnFailureListener
 
 open class BaseViewModel : ViewModel() {
 

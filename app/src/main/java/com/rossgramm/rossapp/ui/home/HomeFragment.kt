@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.rossgramm.rossapp.R
 import com.rossgramm.rossapp.databinding.FragmentHomeBinding
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), FeedAdapter.Listener {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -35,10 +37,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val home =  ViewModelProvider(this).get(HomeViewModel::class.java)
         home.loadPosts()
-        val adapter = FeedAdapter()
+        val adapter = FeedAdapter(this)
         val postsView: RecyclerView = binding.postFeed
         postsView.layoutManager = LinearLayoutManager(context)
         postsView.adapter = adapter
+
         home.posts.observe(viewLifecycleOwner) {
             adapter.updatePosts(it)
             binding.postFeed.adapter?.notifyDataSetChanged()
@@ -48,5 +51,11 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+  // Открываем комментарии
+    override fun openComments(postId: String) {
+      // TODO надо передать id поста фрагменту, чтобы по нему открывались комментарии
+
+        findNavController().navigate(R.id.navigation_comment)
     }
 }
