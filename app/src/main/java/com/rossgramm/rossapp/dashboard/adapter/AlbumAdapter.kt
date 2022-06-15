@@ -29,6 +29,7 @@ class AlbumAdapter(private val getContext: Context,
         if(listLayout == null) {
 
             val inflateList = (context as Activity).layoutInflater
+
             listLayout = inflateList.inflate(R.layout.test_album_layout, parent, false)
             holder.leftImage = listLayout.findViewById(R.id.first)
             holder.rightImage = listLayout.findViewById(R.id.second)
