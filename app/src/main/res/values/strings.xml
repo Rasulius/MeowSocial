@@ -22,6 +22,10 @@
     <string name="action_registration">Зарегистрироваться</string>
     <string name="login_registration_label1">Регистрируясь, вы принимаете условия</string>
     <string name="login_registration_label2">Политика по обработке персональных данных</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="forget_password">Забыли пароль?</string>
     <string name="no_account_question">У вас еще нет аккаунта?</string>
     <string name="nickname_key">Введите ключ</string>
@@ -38,5 +42,6 @@
     <string name="gorodnaneve">"gorodnaneve Люблю тебя, Петра творенье, Люблю твой строгий, стройный вид... ещё"</string>
     <string name="TODO">"to_do"</string>
     <string name="title_comments">comments</string>
+
 
 </resources>
