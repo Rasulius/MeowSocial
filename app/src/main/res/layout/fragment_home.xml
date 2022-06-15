@@ -34,7 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50sp"
                 android:layout_weight="5"
-                android:src="@drawable/ic_logo"
+                android:src="@drawable/login_logo"
                 tools:ignore="MissingConstraints" />
 
             <ImageView

@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_fragment_nav) as NavHostFragment
         val navController = navHostFragment.navController
+
+        setupBottomNavMenu(navController)
+    }
+
+    private fun setupBottomNavMenu(navController: NavController) =
+        binding.navView.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         //setupActionBar(navController, appBarConfiguration)
         setupBottomNavMenu(navController)
@@ -32,10 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setupBottomNavMenu(navController: NavController) {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.nav_view)
-        bottomNav?.setupWithNavController(navController)
-    }
+
 
     private fun hideAndUnHideNavigationMenu(navController: NavController) {
         // Для блока комментариев скрваем навигацию. Включаем когда возвращаемся обратно
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val retValue = super.onCreateOptionsMenu(menu)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -60,5 +64,6 @@ class MainActivity : AppCompatActivity() {
         }
         return retValue
     }
+
 
 }

@@ -33,6 +33,7 @@ android {
     dataBinding {
         enabled = true
     }
+
     namespace 'com.rossgramm.rossapp'
 
 

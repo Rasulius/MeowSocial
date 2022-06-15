@@ -34,10 +34,14 @@ class EnterFragment : Fragment() {
         //
 
         binding.loginButton.setOnClickListener {
+            launchSignInFlow()
             goToMainScreen()
         }
         return root
     }
+
+
+    private fun launchSignInFlow() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         with(binding) {
@@ -89,6 +93,7 @@ class EnterFragment : Fragment() {
     }
 
     private fun goToMainScreen() {
+
         val homePage = Intent(context, MainActivity::class.java)
         startActivity(homePage)
     }
