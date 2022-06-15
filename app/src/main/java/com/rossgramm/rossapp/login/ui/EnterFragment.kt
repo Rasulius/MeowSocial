@@ -1,5 +1,6 @@
 package com.rossgramm.rossapp.login.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.rossgramm.rossapp.R
 import com.rossgramm.rossapp.base.ui.*
+import com.rossgramm.rossapp.MainActivity
 import com.rossgramm.rossapp.databinding.FragmentEnterBinding
 
 class EnterFragment : Fragment() {
@@ -25,8 +27,15 @@ class EnterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentEnterBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        // Пока временная обработка для перехода на следующую аткивность
+        //
+
+        binding.loginButton.setOnClickListener {
+            goToMainScreen()
+        }
         return root
     }
 
@@ -56,6 +65,10 @@ class EnterFragment : Fragment() {
                 }
             }
 
+            viewModel.toHomeScreenLiveData.observe(viewLifecycleOwner){
+                goToMainScreen()
+            }
+
             val afterTextChanged: (String) -> Unit = {
                 viewModel.inputDataChanged(
                     usernameEt.text.toString(),
@@ -73,6 +86,11 @@ class EnterFragment : Fragment() {
             }
             signup.setOnClickListener { findNavController().navigate(R.id.signup_screen) }
         }
+    }
+
+    private fun goToMainScreen() {
+        val homePage = Intent(context, MainActivity::class.java)
+        startActivity(homePage)
     }
 
     override fun onDestroyView() {
