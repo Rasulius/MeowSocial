@@ -1,52 +1,61 @@
 package com.rossgramm.rossapp.base.web
 
+import com.rossgramm.rossapp.managers.PreferencesManager
+
 object ApiTokenStore {
 
-    var accessToken: String? = null
-        private set
-        get() {
-            if (field == null) {
-                field = prepareAccessToken()
-            }
-            return field
+    private const val USER_TOKEN = "user_token"
+    private val preferencesManager = PreferencesManager()
+
+
+    private var accessToken: String? = null
+
+    fun getAccessToken(accountId: String): String? {
+        if (accessToken == null) {
+            accessToken = prepareAccessToken(accountId)
         }
+        return accessToken
+    }
 
     fun isTokenExists(): Boolean {
-        //TODO: get from local storage
-        val savedAccessToken = ""
+        val savedAccessToken =
+            preferencesManager.getString(USER_TOKEN, null)
         return !savedAccessToken.isNullOrEmpty()
     }
 
-    fun saveAcessToken(token: String, accountSpn: String?) {
+    fun saveAccessToken(token: String, accountId: String) {
         accessToken = token
-        //TODO: encrypt and put  to local storage
 
-       /* preferencesManager.putString(
-            KEY_ACCESS_TOKEN,
-            encryptData(token, "")
-        )*/
+        preferencesManager.putString(
+            USER_TOKEN,
+            encryptToken(token)
+        )
     }
 
 
     fun removeToken() {
         accessToken = null
-        //TODO: remove from local storage
-        //preferencesManager.removeKey(KEY_ACCESS_TOKEN)
+        preferencesManager.removeKey(USER_TOKEN)
     }
 
-    private fun prepareAccessToken(): String? {
-        //TODO: get from local storage
-        val storedAccessToken = ""//preferencesManager.getString(KEY_ACCESS_TOKEN, null)
 
-        val token: String? = if (storedAccessToken != null) {
-            ""
-            //TODO: dencrypt
-           /*decryptData(
-                storedAccessToken,
-                ""
-            )*/
+    private fun prepareAccessToken(accountId: String): String? {
+        val storedAccessToken = preferencesManager.getString(USER_TOKEN, null)
+
+        val token: String? = if (storedAccessToken != null && accountId != null) {
+            decryptToken(storedAccessToken)
         } else null
 
+        return token
+    }
+
+    private fun encryptToken(token: String): String {
+        //TODO: implement encryption
+        return token
+    }
+
+    private fun decryptToken(token: String): String {
+        //TODO: implement encryption
         return token
     }
 }

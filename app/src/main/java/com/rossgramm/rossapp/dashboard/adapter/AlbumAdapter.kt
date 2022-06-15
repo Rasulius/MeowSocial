@@ -2,10 +2,12 @@ package com.rossgramm.rossapp.login.data.adapters
 
 import android.app.Activity
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import com.rossgramm.rossapp.R
 import com.rossgramm.rossapp.base.common.LoadRandomImageFromAssets
 import com.rossgramm.rossapp.dashboard.data.AlbumItem
 
@@ -27,9 +29,10 @@ class AlbumAdapter(private val getContext: Context,
         if(listLayout == null) {
 
             val inflateList = (context as Activity).layoutInflater
-//            listLayout = inflateList.inflate(R.layout.test_album_layout, parent, false)
-//            holder.leftImage = listLayout.findViewById(R.id.first)
-//            holder.rightImage = listLayout.findViewById(R.id.second)
+
+            listLayout = inflateList.inflate(R.layout.test_album_layout, parent, false)
+            holder.leftImage = listLayout.findViewById(R.id.first)
+            holder.rightImage = listLayout.findViewById(R.id.second)
         }
         else {
             holder = listLayout.getTag() as ViewAlbumItem

@@ -9,14 +9,12 @@ import androidx.lifecycle.ViewModel
 import android.util.Patterns
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
-import com.rossgramm.rossapp.login.domain.LoginRepository
-import com.rossgramm.rossapp.base.Result
+import androidx.lifecycle.ViewModel
 
-import com.rossgramm.rossapp.R
-import com.rossgramm.rossapp.login.domain.LoginResult
-import kotlinx.coroutines.launch
+import com.rossgramm.rossapp.login.domain.LoginRepository
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel(){
+
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm

@@ -1,10 +1,10 @@
 package com.rossgramm.rossapp.login.ui
 
+
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,8 +20,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.rossgramm.rossapp.MainActivity
 import com.rossgramm.rossapp.databinding.ActivityLoginBinding
 import com.rossgramm.rossapp.databinding.FragmentRegistrationBinding
-
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.rossgramm.rossapp.R
+import com.rossgramm.rossapp.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
@@ -132,59 +134,16 @@ class LoginActivity : AppCompatActivity() {
         }.attach()
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
+        val navController = (supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
+            .navController
+
+
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
+            .get(LoginViewModel::class.java)
+
+
+
     }
 
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
-    }
-/*
-    override fun onClick(p0: View?) {
-        Toast.makeText(this,"dddd", Toast.LENGTH_SHORT)
-    }*/
-}
-
-class LoginTabsAdapter(
-    activity: FragmentActivity,
-) : FragmentStateAdapter(activity) {
-
-    companion object {
-
-        const val TAB_ENTER = 0
-        const val TAB_REGISTRATION = 1
-        const val TAB_COUNT = 2
-    }
-
-    override fun getItemCount(): Int = TAB_COUNT
-
-    override fun createFragment(position: Int): Fragment {
-        return if (position == TAB_ENTER) {
-            EnterFragment()
-        } else {
-            RegistrationFragment()
-        }
-    }
-}
-
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
 }

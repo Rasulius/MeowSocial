@@ -23,23 +23,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_fragment_nav) as NavHostFragment
         val navController = navHostFragment.navController
+
         setupBottomNavMenu(navController)
     }
 
     private fun setupBottomNavMenu(navController: NavController) =
         binding.navView.setupWithNavController(navController)
-/*
-    private fun setupActionBar(navController: NavController,
-                               appBarConfig : AppBarConfiguration) {
-        // TODO STEP 9.6 - Have NavigationUI handle what your ActionBar displays
-//        // This allows NavigationUI to decide what label to show in the action bar
-//        // By using appBarConfig, it will also determine whether to
-//        // show the up arrow or drawer menu icon
-//        setupActionBarWithNavController(navController, appBarConfig)
-        // TODO END STEP 9.6
-    }
-*/
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        //setupActionBar(navController, appBarConfiguration)
+        setupBottomNavMenu(navController)
 
+    }
+
+   
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val retValue = super.onCreateOptionsMenu(menu)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -49,5 +45,6 @@ class MainActivity : AppCompatActivity() {
         }
         return retValue
     }
+
 
 }

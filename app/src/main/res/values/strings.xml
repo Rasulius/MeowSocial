@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">RossApp</string>
     <string name="title_home">Домой</string>
     <string name="title_dashboard">Поиск</string>
@@ -15,21 +16,46 @@
     <string name="gorodnaneve">"gorodnaneve Люблю тебя, Петра творенье, Люблю твой строгий, стройный вид... ещё"</string>
     <string name="TODO">"to_do"</string>
     <string name="empty_string" />
+
+    <string name="title_home">Домой</string>
+    <string name="title_dashboard">Поиск</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="empty_string" />
+
+    <!--Login screen-->
     <string name="login_hint">Введите адрес эл. почты</string>
     <string name="password_hint">Пароль</string>
-    <string name="action_sign_in">Войти</string>
+    <string name="action_sign_in">Войти в аккаунт</string>
     <string name="login_alternative_enter_label">Войти с помощью: </string>
     <string name="tab_enter">Вход</string>
     <string name="tab_registration">Регистрация</string>
+
     <string name="login_enter_label">При входе вы подтверждаете согласие с условиями пользования Россграм.</string>
+    <string name="signup">Зарегистрироваться</string>
     <string name="name_hint">Укажите своё имя</string>
     <string name="nickname_hint">Придумайте никней</string>
     <string name="new_password_hint">Придумайте пароль</string>
     <string name="action_registration">Зарегистрироваться</string>
-    <string name="login_registration_label1">Регистрируясь, вы принимаете условия </string>
+    <string name="login_registration_label1">Регистрируясь, вы принимаете условия</string>
     <string name="login_registration_label2">Политика по обработке персональных данных</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Search">Поиск</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="no_account_question">У вас еще нет аккаунта?</string>
+    <string name="nickname_key">Введите ключ</string>
+    <string name="not_robot">Я не робот</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="Search">Поиск</string>
+    <string name="ryta_account">"@ryta_permyakova"</string>
+    <string name="gorodnaneve">"gorodnaneve Люблю тебя, Петра творенье, Люблю твой строгий, стройный вид... ещё"</string>
+    <string name="TODO">"to_do"</string>
+
 
 </resources>
